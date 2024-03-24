@@ -19,4 +19,13 @@ const getSingleTransaction = async (id) => {
     }
 }
 
-module.exports = { getAllTransactions, getSingleTransaction };
+const deleteTransaction = async (id) => {
+    try {
+        const deletedTransaction = await db.one('DELETE FROM transactions WHERE id = $1 RETURNING *', id)
+        return deletedTransaction;
+    } catch (error) {
+        return error;
+    }
+}
+
+module.exports = { getAllTransactions, getSingleTransaction, deleteTransaction };
