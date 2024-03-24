@@ -1,6 +1,14 @@
-DROP DATABASE IF EXISTS myDB -- change name of db
-CREATE DATABASE myDB -- change name of db
+DROP DATABASE IF EXISTS budget_dev; 
+CREATE DATABASE budget_dev; 
 
-\c myDB -- change name of db
+\c budget_dev;
 
--- Create your tables here
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY, 
+    amount DECIMAL(7,2), 
+    date DATE, 
+    transaction_from TEXT, 
+    category TEXT
+    );
+
+-- SELECT * FROM transactions;
