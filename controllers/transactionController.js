@@ -18,7 +18,13 @@ transactions.get('/:id', async (req, res) => {
     const { id } = req.params;
     const singleTransaction = await getSingleTransaction(id);
     if (singleTransaction) {
-        res.status(200).json(singleTransaction);
+        console.log(singleTransaction.id)
+        console.log(id)
+        if (singleTransaction.id == id) {
+            res.status(200).json(singleTransaction);
+        } else {
+            res.status(400).json({ error: `The transaction requested with id ${id} does not exist.` })
+        }
     } else {
         res.status(500).json({ error: 'server error' });
     }
@@ -50,7 +56,11 @@ transactions.put('/:id', checkAmount, checkDate, checkSender, checkCategory, asy
     const { id } = req.params;
     try {
         const updatedTransaction = await updateTransaction(id, req.body);
-        res.status(200).json(updatedTransaction);
+        if (updatedTransaction.id == id) {
+            res.status(200).json(updatedTransaction);
+        } else {
+            res.status(400).json({ error: `Transaction requested with id ${id} does not exist.` })
+        }
     } catch {
         res.status(400).json({ error });
     }
