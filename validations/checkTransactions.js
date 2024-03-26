@@ -37,5 +37,13 @@ const checkSender = (req, res, next) => {
     }
 }
 // -- category: string or undefined
+const checkCategory = (req, res, next) => {
+    const { category } = req.body;
+    if (typeof category === "string" || !category) {
+        next();
+    } else {
+        res.status(400).json({ error: "Please make sure you enter a valid category." })
+    }
+}
 
-module.exports = { checkAmount, checkDate, checkSender };
+module.exports = { checkAmount, checkDate, checkSender, checkCategory };
