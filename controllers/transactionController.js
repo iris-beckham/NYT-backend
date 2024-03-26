@@ -1,6 +1,7 @@
 const express = require('express')
 const transactions = express.Router()
 const { getAllTransactions, getSingleTransaction, deleteTransaction, createTransaction, updateTransaction } = require('../queries/transaction.js')
+const { checkAmount, checkDate, checkSender, checkCategory } = require('../validations/checkTransactions.js')
 
 // INDEX
 transactions.get('/', async (req, res) => {
@@ -35,7 +36,7 @@ transactions.delete('/:id', async (req, res) => {
 })
 
 //CREATE
-transactions.post('/', async (req, res) => {
+transactions.post('/', checkAmount, checkDate, checkSender, checkCategory, async (req, res) => {
     try {
         const createdTransaction = await createTransaction(req.body);
         res.status(200).json(createdTransaction);
@@ -45,7 +46,7 @@ transactions.post('/', async (req, res) => {
 })
 
 //UPDATE
-transactions.put('/:id', async (req, res) => {
+transactions.put('/:id', checkAmount, checkDate, checkSender, checkCategory, async (req, res) => {
     const { id } = req.params;
     try {
         const updatedTransaction = await updateTransaction(id, req.body);
