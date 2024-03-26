@@ -12,8 +12,18 @@ const checkAmount = (req, res, next) => {
         res.status(400).json({ error: "An amount is required" })
     }
 }
-// -- date: date() format, year-month-date, only 12 months
+// -- date: date() format, year-month-date, only 12 months-
+// update later- will probably make this a date type in the form
+const checkDate = (req, res, next) => {
+    const { date } = req.body;
+    console.log('date: ', date)
+    if (date !== "") {
+        next();
+    } else {
+        res.status(400).json({ error: "A date is required" });
+    }
+}
 // -- from: string
 // -- category: string or undefined
 
-module.exports = { checkAmount };
+module.exports = { checkAmount, checkDate };
