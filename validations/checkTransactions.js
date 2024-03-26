@@ -24,6 +24,18 @@ const checkDate = (req, res, next) => {
     }
 }
 // -- from: string
+const checkSender = (req, res, next) => {
+    const { transaction_from } = req.body;
+    if (transaction_from && transaction_from !== "") {
+        if (typeof transaction_from === 'string' && Number.isNaN(Number(transaction_from))) {
+            next();
+        } else {
+            res.status(400).json({ error: "The sender must be a string." });
+        }
+    } else {
+        res.status(400).json({ error: "A sender is required" });
+    }
+}
 // -- category: string or undefined
 
-module.exports = { checkAmount, checkDate };
+module.exports = { checkAmount, checkDate, checkSender };
