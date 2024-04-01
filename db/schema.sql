@@ -11,9 +11,7 @@ CREATE TABLE transactions (
     category TEXT,
     memo TEXT,
     pending BOOLEAN,
-    account VARCHAR(20),
+    account VARCHAR(40),
     recurring BOOLEAN,
     transaction_id UUID DEFAULT gen_random_uuid()
     );
-
-SELECT * FROM transactions;
