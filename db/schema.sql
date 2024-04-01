@@ -8,7 +8,12 @@ CREATE TABLE transactions (
     amount DECIMAL(7,2), 
     date DATE, 
     transaction_from TEXT, 
-    category TEXT
+    category TEXT,
+    memo TEXT,
+    pending BOOLEAN,
+    account VARCHAR(20),
+    recurring BOOLEAN,
+    transaction_id UUID DEFAULT gen_random_uuid()
     );
 
--- SELECT * FROM transactions;
+SELECT * FROM transactions;
