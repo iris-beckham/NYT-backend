@@ -41,4 +41,6 @@ npm run dev
 ```
 8. Go to http://localhost:3000/ (or wherever you opened the port)
 
-
+## Stretch Goals that were Implemented
+- For the edit/create transaction form, all categories and accounts show up as options in the datalist format
+- All dates have been converted in to a more easy to read format
